@@ -102,27 +102,66 @@
     }
 
     .nav-logo {
-      font-weight: 600;
-      font-size: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background: var(--accent-dim);
+      border: 1px solid rgba(167, 139, 250, 0.4);
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 16px;
       letter-spacing: -0.02em;
+      color: var(--accent);
     }
 
     .nav-links {
       display: flex;
-      gap: 32px;
+      gap: 8px;
       list-style: none;
       margin: 0;
       padding: 0;
     }
 
+    .nav-links li {
+      position: relative;
+    }
+
     .nav-links a {
+      display: block;
+      padding: 8px 16px;
       color: var(--text-muted);
       font-size: 14px;
       font-weight: 500;
+      border-radius: 8px;
+      transition: all 0.25s ease;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: 4px;
+      left: 50%;
+      transform: translateX(-50%) scaleX(0);
+      width: 16px;
+      height: 2px;
+      background: var(--accent);
+      border-radius: 1px;
+      transition: transform 0.25s ease;
     }
 
     .nav-links a:hover {
       color: var(--text-main);
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .nav-links a:hover::after {
+      transform: translateX(-50%) scaleX(1);
+    }
+
+    .nav-links a:active {
+      background: rgba(255, 255, 255, 0.1);
     }
 
     header {
