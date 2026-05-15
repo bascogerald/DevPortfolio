@@ -153,6 +153,7 @@
       aspect-ratio: 1;
       overflow: hidden;
       transition: transform 0.4s ease, box-shadow 0.4s ease;
+      position: relative;
     }
 
     .photo:hover {
@@ -160,14 +161,44 @@
       box-shadow: 0 20px 48px rgba(167, 139, 250, 0.2);
     }
 
-    .photo img {
+    .photo-img {
+      position: absolute;
+      inset: 0;
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transition: transform 0.4s ease;
+    }
+
+    .photo-img:first-child {
+      animation: fadeOut 6s ease-in-out infinite;
+    }
+
+    .photo-img:last-child {
+      animation: fadeIn 6s ease-in-out infinite;
+    }
+
+    @keyframes fadeOut {
+      0%, 40% { opacity: 1; }
+      50%, 90% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+
+    @keyframes fadeIn {
+      0%, 40% { opacity: 0; }
+      50%, 90% { opacity: 1; }
+      100% { opacity: 0; }
+    }
+
+    .photo:hover .photo-img {
+      animation-play-state: paused;
+    }
+
+    .photo:hover .photo-img:first-child {
+      transform: scale(1.08);
     }
 
     .photo:hover img {
+      animation: none;
       transform: scale(1.08);
     }
 
@@ -564,7 +595,8 @@
   <header>
     <section class="hero">
       <div class="glass photo">
-        <img src="meh.jpg" alt="Gerald W. Basco Jr." loading="lazy" />
+        <img src="meh.jpg" alt="Gerald W. Basco Jr." loading="lazy" class="photo-img" />
+        <img src="meh_smile.png" alt="Gerald W. Basco Jr." class="photo-img" />
       </div>
 
       <div class="glass intro">
