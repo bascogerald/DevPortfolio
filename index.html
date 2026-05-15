@@ -3,197 +3,581 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Gerald W. Basco Jr. · Software Engineer</title>
+  <title>Gerald W. Basco Jr. · ASP.NET / .NET Backend Developer</title>
+  <meta name="description" content="Software Engineer specializing in ASP.NET, .NET, WCF, APIs, SQL Server, and modern JavaScript frameworks. Based in Baguio City, Philippines." />
+  <meta name="author" content="Gerald W. Basco Jr." />
 
+  <!-- Open Graph -->
+  <meta property="og:title" content="Gerald W. Basco Jr. · Software Engineer" />
+  <meta property="og:description" content="ASP.NET / .NET Backend Developer with 10+ years of experience" />
+  <meta property="og:type" content="website" />
+
+  <!-- Fallback font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💻</text></svg>" />
+
+  
   <style>
     :root {
-      --glass-bg: rgba(255, 255, 255, 0.12);
-      --glass-border: rgba(255, 255, 255, 0.22);
+      --glass-bg: rgba(255, 255, 255, 0.06);
+      --glass-border: rgba(255, 255, 255, 0.1);
       --text-main: #ffffff;
-      --text-muted: rgba(255, 255, 255, 0.75);
-      --accent: #8b7bff;
+      --text-muted: rgba(255, 255, 255, 0.65);
+      --accent: #a78bfa;
+      --accent-dim: rgba(167, 139, 250, 0.15);
     }
 
     * {
       box-sizing: border-box;
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       margin: 0;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Helvetica Neue", "Inter", system-ui, sans-serif;
       color: var(--text-main);
-      background: radial-gradient(circle at top, #3a2d5f, #0b0912);
+      background: linear-gradient(165deg, #0f0d1a 0%, #1a1625 40%, #0d0a14 100%);
+      background-attachment: fixed;
       min-height: 100vh;
+      line-height: 1.65;
+      font-size: 16px;
+    }
+
+    /* Subtle grid pattern */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    a:hover {
+      color: #c4b5fd;
+    }
+
+    a:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+      border-radius: 4px;
+    }
+
+    ::selection {
+      background: var(--accent);
+      color: #1a1625;
+    }
+
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 100;
+      background: linear-gradient(to bottom, rgba(15, 13, 26, 0.85), rgba(15, 13, 26, 0.7));
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .nav-logo {
+      font-weight: 600;
+      font-size: 18px;
+      letter-spacing: -0.02em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .nav-links a:hover {
+      color: var(--text-main);
     }
 
     header {
-      padding: 80px 20px 40px;
+      padding: 140px 24px 60px;
       display: flex;
       justify-content: center;
     }
 
     .hero {
-      max-width: 1000px;
+      max-width: 800px;
       width: 100%;
       display: grid;
-      grid-template-columns: 280px 1fr;
-      gap: 40px;
+      grid-template-columns: 180px 1fr;
+      gap: 48px;
       align-items: center;
     }
 
     .glass {
       background: var(--glass-bg);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
       border: 1px solid var(--glass-border);
-      border-radius: 24px;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+      border-radius: 20px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
     }
 
     .photo {
-      height: 280px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 14px;
-      color: var(--text-muted);
+      aspect-ratio: 1;
+      overflow: hidden;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+
+    .photo:hover {
+      transform: scale(1.05);
+      box-shadow: 0 20px 48px rgba(167, 139, 250, 0.2);
     }
 
     .photo img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      border-radius: 24px;
+      transition: transform 0.4s ease;
     }
 
-    .photo span {
-      opacity: 0.8;
+    .photo:hover img {
+      transform: scale(1.08);
     }
 
     .intro {
-      padding: 32px;
+      padding: 24px 32px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .intro .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      border-radius: 100px;
+      background: var(--accent-dim);
+      border: 1px solid rgba(167, 139, 250, 0.3);
+      font-size: 13px;
+      color: var(--accent);
+      margin-bottom: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .intro .badge::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0.3) 50%,
+        transparent 100%
+      );
+      transform: translateX(-100%);
+      animation: shine 3s ease-in-out infinite;
+    }
+
+    .intro .badge::after {
+      content: '';
+      width: 6px;
+      height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+      box-shadow: 0 0 8px var(--accent);
+    }
+
+    @keyframes shine {
+      0% { transform: translateX(-100%); }
+      50%, 100% { transform: translateX(100%); }
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.7; transform: scale(0.9); }
     }
 
     .intro h1 {
-      margin: 0 0 10px;
-      font-size: 36px;
+      margin: 0 0 12px;
+      font-size: 40px;
       font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
     }
 
     .intro h2 {
-      margin: 0 0 20px;
-      font-size: 18px;
-      font-weight: 500;
+      margin: 0 0 16px;
+      font-size: 20px;
+      font-weight: 400;
       color: var(--text-muted);
+      letter-spacing: -0.01em;
     }
 
-    .pill {
-      display: inline-flex;
+    .intro .location {
+      display: flex;
       align-items: center;
-      gap: 10px;
-      padding: 12px 20px;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.15);
-      border: 1px solid rgba(255, 255, 255, 0.25);
+      gap: 8px;
+      color: var(--text-muted);
       font-size: 14px;
-      margin-top: 10px;
+    }
+
+    .intro .location svg {
+      width: 16px;
+      height: 16px;
+      opacity: 0.7;
     }
 
     main {
-      padding: 40px 20px 80px;
+      padding: 40px 24px 100px;
       display: flex;
       justify-content: center;
     }
 
     .content {
-      max-width: 1000px;
+      max-width: 800px;
       width: 100%;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 30px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .section-title {
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+      margin: 0 0 8px;
+      padding-left: 4px;
     }
 
     .card {
-      padding: 28px;
+      padding: 32px;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .card:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+    }
+
+    .card:hover {
+      background: rgba(255, 255, 255, 0.08);
+      transform: translateY(-2px);
+    }
+
+    .card-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: 16px;
     }
 
     .card h3 {
-      margin: 0 0 12px;
-      font-size: 20px;
+      margin: 0;
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+    }
+
+    .card-icon {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--accent-dim);
+      border-radius: 10px;
+      font-size: 18px;
     }
 
     .card p {
       margin: 0;
-      line-height: 1.6;
+      line-height: 1.7;
       color: var(--text-muted);
       font-size: 15px;
-      word-break: break-word;
-      overflow-wrap: anywhere;
     }
 
     .skills {
       display: flex;
       flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 15px;
+      gap: 8px;
+      margin-top: 16px;
     }
 
     .skill {
-      padding: 8px 14px;
-      border-radius: 999px;
+      padding: 6px 12px;
+      border-radius: 6px;
       font-size: 13px;
-      background: rgba(255, 255, 255, 0.14);
-      border: 1px solid rgba(255, 255, 255, 0.22);
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: var(--text-muted);
+    }
+
+    .experience-item {
+      padding: 20px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .experience-item:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .experience-item h4 {
+      margin: 0 0 4px;
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    .experience-item .company {
+      color: var(--accent);
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .experience-item .period {
+      color: var(--text-muted);
+      font-size: 13px;
+      margin-bottom: 10px;
+    }
+
+    .experience-item p {
+      margin: 0;
     }
 
     footer {
       text-align: center;
-      padding: 40px 20px;
+      padding: 40px 24px;
       color: var(--text-muted);
       font-size: 14px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    footer a {
+      color: var(--text-muted);
+    }
+
+    footer a:hover {
+      color: var(--accent);
     }
 
     @media (max-width: 768px) {
+      nav {
+        padding: 16px 20px;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      header {
+        padding: 100px 20px 40px;
+      }
+
       .hero {
         grid-template-columns: 1fr;
         text-align: center;
+        gap: 24px;
       }
 
       .photo {
-        height: 220px;
+        width: 140px;
+        margin: 0 auto;
+      }
+
+      .intro h1 {
+        font-size: 32px;
+      }
+
+      .intro h2 {
+        font-size: 16px;
+      }
+
+      .card {
+        padding: 24px;
+      }
+
+      .card-header {
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .content {
+        gap: 32px;
       }
     }
-  
+
     /* Interactive effects */
+    .glass {
+      transition: all 0.3s ease;
+    }
+
     .glass.hovered {
-      transform: translateY(-6px) scale(1.01);
-      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.55);
+      background: rgba(255, 255, 255, 0.1);
+      box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4);
     }
 
     .reveal {
       opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
+      transform: translateY(20px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
     }
 
     .reveal.visible {
       opacity: 1;
       transform: translateY(0);
     }
+
+    /* Modal */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(10px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+      z-index: 1000;
+    }
+
+    .modal-backdrop.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal {
+      background: linear-gradient(145deg, #1e1a2e 0%, #16121f 100%);
+      border: 1px solid var(--glass-border);
+      border-radius: 20px;
+      padding: 40px;
+      max-width: 520px;
+      width: 100%;
+      max-height: 85vh;
+      overflow-y: auto;
+      transform: scale(0.95) translateY(10px);
+      transition: transform 0.3s ease;
+      box-shadow: 0 24px 64px rgba(0, 0, 0, 0.6);
+      position: relative;
+    }
+
+    .modal-backdrop.active .modal {
+      transform: scale(1) translateY(0);
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 32px;
+      height: 32px;
+      border: none;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 8px;
+      color: var(--text-muted);
+      font-size: 20px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+    }
+
+    .modal-close:hover {
+      background: rgba(255, 255, 255, 0.15);
+      color: white;
+    }
+
+    .modal h3 {
+      margin: 0 0 20px;
+      font-size: 22px;
+      font-weight: 600;
+    }
+
+    .modal p {
+      color: var(--text-muted);
+      line-height: 1.8;
+      font-size: 15px;
+    }
+
+    .modal .skills {
+      margin-top: 24px;
+    }
+
+    .modal .experience-item {
+      padding: 16px 0;
+    }
+
+    .modal .experience-item h4 {
+      font-size: 15px;
+    }
   </style>
 </head>
 <body>
 
+  <nav>
+    <div class="nav-logo">Gr</div>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
   <header>
     <section class="hero">
       <div class="glass photo">
-        <img src="meh.jpg" alt="profile pic" />
+        <img src="meh.jpg" alt="Gerald W. Basco Jr." loading="lazy" />
       </div>
 
       <div class="glass intro">
+        <div class="badge">Available for work</div>
         <h1>Gerald W. Basco Jr.</h1>
-        <h2>ASP.NET / .NET Backend Developer | APIs, WCF, SQL Server</h2>
-        <p class="pill">Baguio City, Philippines · Open for Remote / Contract</p>
+        <h2>ASP.NET / .NET Backend Developer || AI Automations { n8n | make | zapier | GHL } </h2>
+        <div class="location">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/>
+            <circle cx="12" cy="10" r="3"/>
+          </svg>
+          Baguio City, Philippines
+        </div>
       </div>
     </section>
   </header>
@@ -201,19 +585,53 @@
   <main>
     <section class="content">
 
-      <div class="glass card reveal">
-        <h3>About Me</h3>
+      <p class="section-title" id="about">About</p>
+      <div class="glass card reveal" data-section="about">
+        <div class="card-header">
+          <h3>About Me</h3>
+          <div class="card-icon">👤</div>
+        </div>
         <p>
-          I am a Software Engineer with over a decade of experience building
-          web, backend, and enterprise systems. I have worked on government,
-          education, insurance, and financial systems using .NET, SQL Server,
-          and modern JavaScript frameworks. I enjoy improving existing systems,
-          migrating legacy applications, and building reliable solutions.
+          I am a Software Engineer with over a decade of experience building web, backend, and enterprise systems. I have worked on government, education, insurance, and financial systems using .NET, SQL Server, and modern JavaScript frameworks. I enjoy improving existing systems, migrating legacy applications, and building reliable solutions.
         </p>
       </div>
 
-      <div class="glass card reveal">
-        <h3>Skills</h3>
+      <p class="section-title" id="experience">Experience</p>
+      <div class="glass card reveal" data-section="experience">
+        <div class="card-header">
+          <h3>Work History</h3>
+          <div class="card-icon">💼</div>
+        </div>
+        <div class="experience-item">
+          <h4>.NET Developer</h4>
+          <div class="company">Ascendion (Client: PJ Lhuillier)</div>
+          <div class="period">Jan 2023 – Dec 2025</div>
+          <p>Enhanced and maintained legacy systems built in classic ASP.NET and WCF, and helped migrate parts of the system to Node.js, Express, and React Native.</p>
+        </div>
+        <div class="experience-item">
+          <h4>Associate Consultant</h4>
+          <div class="company">Capgemini</div>
+          <div class="period">Jun 2022 – Dec 2022</div>
+          <p>Worked on Duck Creek Insurance solutions, integrating insurance processes and enhancing internal systems using Agile practices.</p>
+        </div>
+        <div class="experience-item">
+          <h4>Computer Programmer</h4>
+          <div class="company">University of the Cordilleras</div>
+          <p>Developed ASP.NET MVC systems including student DTR and online grade uploading platforms used by interns and teachers.</p>
+        </div>
+        <div class="experience-item">
+          <h4>Computer Programmer</h4>
+          <div class="company">Electronic Way Professional Services Inc.</div>
+          <p>Contributed to a Real Property Tax Administration System for LGUs, covering property records, tax computation, payments, and reporting.</p>
+        </div>
+      </div>
+
+      <p class="section-title" id="skills">Skills</p>
+      <div class="glass card reveal" data-section="skills">
+        <div class="card-header">
+          <h3>Technical Skills</h3>
+          <div class="card-icon">⚡</div>
+        </div>
         <div class="skills">
           <span class="skill">C#</span>
           <span class="skill">ASP.NET MVC</span>
@@ -221,7 +639,7 @@
           <span class="skill">Web API</span>
           <span class="skill">SQL Server</span>
           <span class="skill">MySQL</span>
-          <span class="skill">JavaScript ES5/ES6</span>
+          <span class="skill">JavaScript ES6</span>
           <span class="skill">React</span>
           <span class="skill">React Native</span>
           <span class="skill">Node.js</span>
@@ -232,69 +650,179 @@
         </div>
       </div>
 
-      <div class="glass card reveal">
-        <h3>Experience & Key Projects</h3>
+      <p class="section-title" id="contact">Contact</p>
+      <div class="glass card reveal" data-section="contact">
+        <div class="card-header">
+          <h3>Get in Touch</h3>
+          <div class="card-icon">📬</div>
+        </div>
         <p>
-          <strong>.NET Developer – Ascendion (Client: PJ Lhuillier)</strong><br />
-          Jan 2023 – Dec 2025<br />
-          Enhanced and maintained legacy systems built in classic ASP.NET and WCF,
-          and helped migrate parts of the system to Node.js, Express, and React Native.
-          <br /><br />
-          <strong>Associate Consultant – Capgemini</strong><br />
-          Jun 2022 – Dec 2022<br />
-          Worked on Duck Creek Insurance solutions, integrating insurance processes
-          and enhancing internal systems using Agile practices.
-          <br /><br />
-          <strong>Computer Programmer – University of the Cordilleras</strong><br />
-          Developed ASP.NET MVC systems including student DTR and online grade
-          uploading platforms used by interns and teachers.
-          <br /><br />
-          <strong>Computer Programmer – Electronic Way Professional Services Inc.</strong><br />
-          Contributed to a Real Property Tax Administration System for LGUs,
-          covering property records, tax computation, payments, and reporting.
+          I'm currently available for remote work and contract opportunities. Feel free to reach out!
         </p>
-      </div>
-
-      <div class="glass card reveal">
-        <h3>Contact</h3>
-        <p>
-          Email: bascogerald@gmail.com<br />
-          Mobile: +639279172668<br />
-          Location: Baguio City, Philippines<br />
-          GitHub: https://github.com/lairevash<br />
-          LinkedIn: https://www.linkedin.com/in/bascogeraldjr/
-        </p>
+        <div class="skills" style="margin-top: 16px;">
+          <span class="skill">📧 bascogerald@gmail.com</span>
+          <span class="skill">📱 +63 927 917 2668</span>
+          <span class="skill">🐙 <a href="https://github.com/bascogerald" target="_blank" rel="noopener">GitHub</a></span>
+          <span class="skill">💼 <a href="https://www.linkedin.com/in/bascogeraldjr/" target="_blank" rel="noopener">LinkedIn</a></span>
+        </div>
       </div>
 
     </section>
   </main>
 
   <footer>
-    © 2026 · Built with HTML & CSS · Hosted on GitHub Pages
+    <p>© 2026 Gerald W. Basco Jr. · <a href="mailto:bascogerald@gmail.com">Contact</a></p>
   </footer>
 
-  <script>
-    // Hover tilt effect for glass cards
-    document.querySelectorAll('.glass').forEach(card => {
-      card.addEventListener('mouseenter', () => {
-        card.classList.add('hovered');
-      });
+  <!-- Modal -->
+  <div class="modal-backdrop" id="modal" aria-hidden="true">
+    <div class="glass modal" role="dialog" aria-modal="true">
+      <button class="modal-close" aria-label="Close modal">&times;</button>
+      <h3 id="modal-title"></h3>
+      <div id="modal-content"></div>
+    </div>
+  </div>
 
-      card.addEventListener('mouseleave', () => {
-        card.classList.remove('hovered');
-      });
+  <script>
+    // Modal functionality
+    const modal = document.getElementById('modal');
+    const modalTitle = document.getElementById('modal-title');
+    const modalContent = document.getElementById('modal-content');
+    const modalClose = document.querySelector('.modal-close');
+
+    const cardData = {
+      about: {
+        title: 'About Me',
+        content: `
+          <p>I am a Software Engineer with over a decade of experience building web, backend, and enterprise systems. I have worked on government, education, insurance, and financial systems using .NET, SQL Server, and modern JavaScript frameworks.</p>
+          <p style="margin-top: 16px;">I enjoy improving existing systems, migrating legacy applications, and building reliable solutions. My passion lies in creating efficient, maintainable code and continuously learning new technologies.</p>
+        `
+      },
+      experience: {
+        title: 'Work Experience',
+        content: `
+          <div class="experience-item">
+            <h4>.NET Developer</h4>
+            <div class="company">Ascendion (Client: PJ Lhuillier)</div>
+            <div class="period">Jan 2023 – Dec 2025</div>
+            <p>Enhanced and maintained legacy systems built in classic ASP.NET and WCF, and helped migrate parts of the system to Node.js, Express, and React Native.</p>
+          </div>
+          <div class="experience-item">
+            <h4>Associate Consultant</h4>
+            <div class="company">Capgemini</div>
+            <div class="period">Jun 2022 – Dec 2022</div>
+            <p>Worked on Duck Creek Insurance solutions, integrating insurance processes and enhancing internal systems using Agile practices.</p>
+          </div>
+          <div class="experience-item">
+            <h4>Computer Programmer</h4>
+            <div class="company">University of the Cordilleras</div>
+            <p>Developed ASP.NET MVC systems including student DTR and online grade uploading platforms used by interns and teachers.</p>
+          </div>
+          <div class="experience-item">
+            <h4>Computer Programmer</h4>
+            <div class="company">Electronic Way Professional Services Inc.</div>
+            <p>Contributed to a Real Property Tax Administration System for LGUs, covering property records, tax computation, payments, and reporting.</p>
+          </div>
+        `
+      },
+      skills: {
+        title: 'Technical Skills',
+        content: `
+          <div class="skills">
+            <span class="skill">C#</span>
+            <span class="skill">ASP.NET MVC</span>
+            <span class="skill">WCF</span>
+            <span class="skill">Web API</span>
+            <span class="skill">SQL Server</span>
+            <span class="skill">MySQL</span>
+            <span class="skill">JavaScript ES6</span>
+            <span class="skill">React</span>
+            <span class="skill">React Native</span>
+            <span class="skill">Node.js</span>
+            <span class="skill">Express</span>
+            <span class="skill">Docker</span>
+            <span class="skill">Git</span>
+            <span class="skill">Agile</span>
+          </div>
+        `
+      },
+      contact: {
+        title: 'Contact',
+        content: `
+          <p>I'm currently available for remote work and contract opportunities. Feel free to reach out!</p>
+          <div class="skills" style="margin-top: 20px;">
+            <span class="skill">📧 bascogerald@gmail.com</span>
+            <span class="skill">📱 +63 927 917 2668</span>
+            <span class="skill">🐙 GitHub: lairevash</span>
+            <span class="skill">💼 LinkedIn</span>
+          </div>
+        `
+      }
+    };
+
+    function openModal(section) {
+      const data = cardData[section];
+      if (!data) return;
+      modalTitle.textContent = data.title;
+      modalContent.innerHTML = data.content;
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+      modalClose.focus();
+    }
+
+    function closeModal() {
+      modal.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    document.querySelectorAll('.card').forEach(card => {
+      const section = card.dataset.section;
+      if (section && cardData[section]) {
+        card.style.cursor = 'pointer';
+        card.addEventListener('click', () => openModal(section));
+        card.setAttribute('role', 'button');
+        card.setAttribute('aria-label', `View ${cardData[section].title} details`);
+      }
     });
 
-    // Scroll reveal animation
+    modalClose.addEventListener('click', closeModal);
+    modal.addEventListener('click', e => {
+      if (e.target === modal) closeModal();
+    });
+
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && modal.classList.contains('active')) closeModal();
+    });
+
+    // Hover effect for glass cards
+    document.querySelectorAll('.glass').forEach(card => {
+      card.addEventListener('mouseenter', () => card.classList.add('hovered'));
+      card.addEventListener('mouseleave', () => card.classList.remove('hovered'));
+    });
+
+    // Staggered scroll reveal animation
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.15 });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    document.querySelectorAll('.reveal').forEach((el, i) => {
+      el.style.transitionDelay = `${i * 0.1}s`;
+      observer.observe(el);
+    });
+
+    // Smooth scroll for nav links
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', e => {
+        e.preventDefault();
+        const target = document.querySelector(link.getAttribute('href'));
+        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
   </script>
 
 </body>
